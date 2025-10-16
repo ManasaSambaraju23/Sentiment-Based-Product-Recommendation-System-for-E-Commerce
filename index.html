@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Recommendation System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #c0392b;
+            background: #fceaea;
+            border-left: 4px solid #c0392b;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .success {
+            color: #2e7d32;
+            background: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        ol {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 5px solid #007bff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ Product Recommendation System</h1>
+
+        <form method="post" action="/recommend">
+            <input type="text" name="username" placeholder="Enter your username" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if success %}
+            <div class="success">
+                <strong>Recommendations generated successfully for:</strong> {{ username }}
+            </div>
+
+            <h3>Top 5 Recommended Products:</h3>
+            <ol>
+                {% for product in recommendations %}
+                    <li>{{ product }}</li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Powered by Logistic Regression & Sentiment-based Recommendations</p>
+    </footer>
+</body>
+</html>
